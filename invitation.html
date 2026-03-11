@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이현배, 신명주님의 아들 이재현과 김난희님의 딸 이선미 결혼합니다</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Malgun Gothic', sans-serif; background-color: #f5f0eb; overflow-x: hidden; }
+
+        .section {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            background-size: 100% auto;
+            background-position: top center;
+            background-repeat: no-repeat;
+            background-color: #f5f0eb;
+        }
+
+        #section1 { background-image: url('pdf_page_1.png'); }
+        #section2 { background-image: url('pdf_page_2.png'); }
+        #section3 { background-image: url('pdf_page_3.png'); }
+        #section4 { background-image: url('pdf_page_4.png'); }
+
+        /* Scroll Animation */
+        .section { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .section.visible { opacity: 1; transform: translateY(0); }
+        #section2 { transition-delay: 0.1s; }
+        #section3 { transition-delay: 0.2s; }
+        #section4 { transition-delay: 0.3s; }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .section { min-height: auto; aspect-ratio: 595 / 842; background-size: 100% auto; }
+        }
+
+        /* Copy Buttons - Overlay on Background */
+        .copy-btn {
+            position: absolute;
+            padding: 6px 10px;
+            background: rgba(133, 123, 92, 0.8);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { background: rgba(133, 123, 92, 1); transform: scale(1.1); }
+        .copy-btn.copied { background: #fe9c9c; }
+
+        /* Page 2 - Invitation */
+        #section2 .copy-account { bottom: 52%; left: 58%; }
+        #section2 .copy-bride { bottom: 44%; left: 58%; }
+        #section2 .copy-groom-parent { bottom: 28%; left: 48%; }
+        #section2 .copy-bride-parent { bottom: 8%; left: 48%; }
+
+        /* Page 4 - Location */
+        #section4 .copy-address { top: 45%; left: 45%; }
+        #section4 .copy-phone { top: 51%; left: 55%; }
+        #section4 .copy-navi { top: 78%; left: 45%; }
+
+        @media (max-width: 768px) {
+            .copy-btn { font-size: 9px; padding: 4px 7px; }
+            #section2 .copy-account { bottom: 52%; left: 62%; }
+            #section2 .copy-bride { bottom: 44%; left: 62%; }
+            #section2 .copy-groom-parent { bottom: 28%; left: 52%; }
+            #section2 .copy-bride-parent { bottom: 8%; left: 52%; }
+            #section4 .copy-address { top: 45%; left: 48%; }
+            #section4 .copy-phone { top: 51%; left: 58%; }
+            #section4 .copy-navi { top: 78%; left: 48%; }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+        }
+        .scroll-indicator span {
+            display: block;
+            width: 20px;
+            height: 20px;
+            border-right: 3px solid #857b5c;
+            border-bottom: 3px solid #857b5c;
+            transform: rotate(45deg);
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1: Cover -->
+    <section id="section1" class="section"></section>
+
+    <!-- Page 2: Invitation + Copy Buttons -->
+    <section id="section2" class="section">
+        <button class="copy-btn copy-account" onclick="copyText('3333-209-737250', this)">복사</button>
+        <button class="copy-btn copy-bride" onclick="copyText('242-910129-77507', this)">복사</button>
+        <button class="copy-btn copy-groom-parent" onclick="copyText('9004-003-094612', this)">복사</button>
+        <button class="copy-btn copy-bride-parent" onclick="copyText('3333-11-605-9904', this)">복사</button>
+    </section>
+
+    <!-- Page 3: Gallery -->
+    <section id="section3" class="section"></section>
+
+    <!-- Page 4: Location + Copy Buttons -->
+    <section id="section4" class="section">
+        <button class="copy-btn copy-address" onclick="copyText('경남 김해시 가야로 347-30', this)">복사</button>
+        <button class="copy-btn copy-phone" onclick="copyText('055-324-6600', this)">복사</button>
+        <button class="copy-btn copy-navi" onclick="copyText('김해 산정', this)">복사</button>
+    </section>
+
+    <div class="scroll-indicator"><span></span></div>
+
+    <script>
+        // Scroll Animation
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        sections.forEach(section => observer.observe(section));
+
+        // Hide scroll indicator
+        window.addEventListener('scroll', () => {
+            document.querySelector('.scroll-indicator').style.opacity = window.scrollY > window.innerHeight * 0.3 ? '0' : '0.7';
+        });
+
+        // Copy Function
+        function copyText(text, btn) {
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '됨!';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = '복사'; btn.classList.remove('copied'); }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
