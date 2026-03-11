@@ -118,6 +118,16 @@ export default function Home() {
       <section
         id="section1"
         className="section min-h-screen flex flex-col items-center justify-center text-center p-8"
+        style={{
+          backgroundImage: "url('/images/page1.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+      <section
+        id="section1"
+        className="section min-h-screen flex flex-col items-center justify-center text-center p-8"
         style={{ backgroundColor: "#f5f0eb" }}
       >
         <div className="max-w-md">
@@ -141,6 +151,16 @@ export default function Home() {
       </section>
 
       {/* 2페이지: 초대 */}
+      <section
+        id="section2"
+        className="section min-h-screen flex flex-col items-center justify-center p-8"
+        style={{
+          backgroundImage: "url('/images/page2.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
       <section
         id="section2"
         className="section min-h-screen flex flex-col items-center justify-center p-8"
@@ -210,6 +230,16 @@ export default function Home() {
       </section>
 
       {/* 3페이지: 갤러리 + 방명록 */}
+      <section
+        id="section3"
+        className="section min-h-screen flex flex-col items-center justify-center p-8"
+        style={{
+          backgroundImage: "url('/images/page3.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
       <section
         id="section3"
         className="section min-h-screen flex flex-col items-center justify-center p-8"
@@ -293,6 +323,16 @@ export default function Home() {
       </section>
 
       {/* 4페이지: 연락처 & 오시는 길 */}
+      <section
+        id="section4"
+        className="section min-h-screen flex flex-col items-center justify-center p-8"
+        style={{
+          backgroundImage: "url('/images/page4.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
       <section
         id="section4"
         className="section min-h-screen flex flex-col items-center justify-center p-8"
