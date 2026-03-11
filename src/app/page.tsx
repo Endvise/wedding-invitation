@@ -10,7 +10,6 @@ interface Comment {
   created_at: string;
 }
 
-// 4페이지 청첩장 메인 컴포넌트
 export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
@@ -22,7 +21,6 @@ export default function Home() {
 
   useEffect(() => {
     setMounted(true);
-    // 스크롤 애니메이션
     const sections = document.querySelectorAll(".section");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -34,12 +32,8 @@ export default function Home() {
       },
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
-
     sections.forEach((section) => observer.observe(section));
-
-    // 방명록 조회
     fetchComments();
-
     return () => observer.disconnect();
   }, []);
 
@@ -66,7 +60,6 @@ export default function Home() {
       showToast("모든 항목을 입력해주세요.");
       return;
     }
-
     setIsSubmitting(true);
     try {
       const res = await fetch("/api/comments", {
@@ -78,7 +71,6 @@ export default function Home() {
           password: guestbookPassword,
         }),
       });
-
       const data = await res.json();
       if (res.ok) {
         showToast("방명록이 등록되었습니다!");
@@ -102,14 +94,11 @@ export default function Home() {
 
   return (
     <main className="w-full">
-      {/* Toast */}
       {toast && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 bg-[#3d3229] text-white px-6 py-3 rounded-lg z-50 text-sm">
           {toast}
         </div>
       )}
-
-      {/* 스크롤 인디케이터 */}
       <div className="scroll-indicator">
         <span></span>
       </div>
@@ -120,15 +109,10 @@ export default function Home() {
         className="section min-h-screen flex flex-col items-center justify-center text-center p-8"
         style={{
           backgroundImage: "url('/images/page1.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >
-      <section
-        id="section1"
-        className="section min-h-screen flex flex-col items-center justify-center text-center p-8"
-        style={{ backgroundColor: "#f5f0eb" }}
       >
         <div className="max-w-md">
           <p className="text-sm tracking-[0.3em] text-[#6b5f52] mb-4">
@@ -156,15 +140,10 @@ export default function Home() {
         className="section min-h-screen flex flex-col items-center justify-center p-8"
         style={{
           backgroundImage: "url('/images/page2.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >
-      <section
-        id="section2"
-        className="section min-h-screen flex flex-col items-center justify-center p-8"
-        style={{ backgroundColor: "#faf8f5" }}
       >
         <div className="max-w-md w-full">
           <div className="text-center mb-12">
@@ -177,9 +156,7 @@ export default function Home() {
               살겠습니다.
             </p>
           </div>
-
-          {/* 결혼식 정보 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm mb-8">
+          <div className="bg-white/90 rounded-2xl p-6 shadow-sm mb-8">
             <h3 className="text-lg font-medium text-[#3d3229] mb-4 text-center">
               Wedding Day
             </h3>
@@ -204,8 +181,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* 계좌번호 */}
           <div className="space-y-3">
             <h3 className="text-lg font-medium text-[#3d3229] mb-4 text-center">
               마음 전할 곳
@@ -235,40 +210,29 @@ export default function Home() {
         className="section min-h-screen flex flex-col items-center justify-center p-8"
         style={{
           backgroundImage: "url('/images/page3.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >
-      <section
-        id="section3"
-        className="section min-h-screen flex flex-col items-center justify-center p-8"
-        style={{ backgroundColor: "#f5f0eb" }}
       >
         <div className="max-w-md w-full">
           <h2 className="text-2xl font-light text-center text-[#3d3229] mb-8">
             Our Gallery
           </h2>
-          
-          {/* 갤러리 - 이미지가 없을 때 플레이스홀더 */}
           <div className="grid grid-cols-2 gap-3 mb-10">
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
-                className="aspect-square bg-[#e8e3dc] rounded-lg flex items-center justify-center"
+                className="aspect-square bg-[#e8e3dc]/50 rounded-lg flex items-center justify-center"
               >
                 <span className="text-[#9a8b7c] text-sm">Photo {i}</span>
               </div>
             ))}
           </div>
-
-          {/* 방명록 */}
-          <div className="bg-white rounded-2xl p-6 shadow-sm">
+          <div className="bg-white/90 rounded-2xl p-6 shadow-sm">
             <h3 className="text-lg font-medium text-[#3d3229] mb-4 text-center">
               방명록
             </h3>
-            
-            {/* 방명록 작성 폼 */}
             <form onSubmit={handleGuestbookSubmit} className="space-y-3 mb-6">
               <input
                 type="text"
@@ -299,8 +263,6 @@ export default function Home() {
                 {isSubmitting ? "등록 중..." : "방명록 남기기"}
               </button>
             </form>
-
-            {/* 방명록 목록 */}
             <div className="space-y-3 max-h-60 overflow-y-auto">
               {comments.length === 0 ? (
                 <p className="text-center text-[#9a8b7c] text-sm py-4">
@@ -328,39 +290,30 @@ export default function Home() {
         className="section min-h-screen flex flex-col items-center justify-center p-8"
         style={{
           backgroundImage: "url('/images/page4.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
-      >
-      <section
-        id="section4"
-        className="section min-h-screen flex flex-col items-center justify-center p-8"
-        style={{ backgroundColor: "#faf8f5" }}
       >
         <div className="max-w-md w-full">
           <h2 className="text-2xl font-light text-center text-[#3d3229] mb-8">
             Contact & Location
           </h2>
-
-          {/* 연락처 */}
           <div className="space-y-4 mb-8">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
+            <div className="bg-white/90 rounded-xl p-4 shadow-sm">
               <p className="text-sm text-[#9a8b7c] mb-2">신랑측</p>
               <p className="text-[#3d3229] font-medium">{groom.name}</p>
               <p className="text-sm text-[#6b5f52]">
                 {groom.father}, {groom.mother}
               </p>
             </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
+            <div className="bg-white/90 rounded-xl p-4 shadow-sm">
               <p className="text-sm text-[#9a8b7c] mb-2">신부측</p>
               <p className="text-[#3d3229] font-medium">{bride.name}</p>
               <p className="text-sm text-[#6b5f52]">{bride.mother}</p>
             </div>
           </div>
-
-          {/* 오시는 길 */}
-          <div className="bg-white rounded-xl p-5 shadow-sm">
+          <div className="bg-white/90 rounded-xl p-5 shadow-sm">
             <h3 className="text-lg font-medium text-[#3d3229] mb-4">
               오시는 길
             </h3>
@@ -383,8 +336,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-
-          {/* 공유 버튼 */}
           <button
             onClick={() => {
               navigator.clipboard.writeText(window.location.href);
@@ -400,7 +351,6 @@ export default function Home() {
   );
 }
 
-// 계좌번호 복사 버튼 컴포넌트
 function AccountButton({
   bank,
   account,

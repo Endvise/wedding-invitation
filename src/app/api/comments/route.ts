@@ -1,18 +1,20 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 // Service role client for server-side operations
-const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey, {
-  auth: {
-    autoRefreshToken: false,
-    persistSession: false
-  }
-});
+const supabaseAdmin = supabaseServiceKey 
+  ? createClient(supabaseUrl, supabaseServiceKey, {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    })
+  : null;
 
-// Simple hash function for password (in production, use bcrypt)
+// Simple hash function for password
 function simpleHash(str: string): string {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -25,6 +27,10 @@ function simpleHash(str: string): string {
 
 // GET - Fetch comments
 export async function GET() {
+  if (!supabaseAdmin) {
+    return NextResponse.json({ comments: [] });
+  }
+  
   try {
     const { data, error } = await supabaseAdmin
       .from('comments')
@@ -44,6 +50,10 @@ export async function GET() {
 
 // POST - Create comment
 export async function POST(request: Request) {
+  if (!supabaseAdmin) {
+    return NextResponse.json({ error: 'Service not configured' }, { status: 500 });
+  }
+  
   try {
     const { name, message, password } = await request.json();
 
