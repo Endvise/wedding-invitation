@@ -2,7 +2,7 @@
 
 export const weddingConfig = {
   groom: {
-    name: process.env.NEXT_PUBLIC_GROOM_NAME || '이재현',
+    name: process.env.NEXT_PUBLIC_GROOM_NAME || '이현재',
     father: process.env.NEXT_PUBLIC_GROOM_FATHER || '이현배',
     mother: process.env.NEXT_PUBLIC_GROOM_MOTHER || '신명주',
     account: {
