@@ -11,15 +11,15 @@ export const metadata: Metadata = {
     url: "https://wedding-invitation-tan-iota.vercel.app",
     images: [
       {
-        url: "https://wedding-invitation-tan-iota.vercel.app/og-image.png",
+        url: "https://wedding-invitation-tan-iota.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "이재현 ♥ 이선미 결혼합니다",
       },
     ],
-  },
-  other: {
-    "og:image": "https://wedding-invitation-tan-iota.vercel.app/og-image.png",
+  }
+
+    "og:image": "https://wedding-invitation-tan-iota.vercel.app/og-image.jpg",
   },
 };
 
