@@ -85,12 +85,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* PAGE 3 */}
+      {/* PAGE 3 - 방명록만 (갤러리 제거) */}
       <div style={S.page}>
         <img src="/images/page3.jpg" style={S.bgImg} alt="bg3"/>
         <div style={S.overlay}>
-          <h2 style={S.sectionTitle}>Our Gallery</h2>
-          <div style={S.galleryGrid}>{[1,2,3,4,5,6].map(i => <div key={i} style={S.galleryItem}><span>Photo {i}</span></div>)}</div>
           <div style={S.card}>
             <h3 style={S.cardTitle}>방명록</h3>
             <form onSubmit={handleSubmit} style={S.form}>
