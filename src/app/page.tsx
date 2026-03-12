@@ -111,7 +111,7 @@ export default function Home() {
         <img src="/images/page2.jpg" style={S.bgImg} alt="bg2"/>
         <motion.div style={S.overlay}>
           <motion.div style={S.card} variants={cardVariants} custom={1}><h3 style={S.cardTitle}>Wedding Day</h3><div style={S.row}><span>일시</span><span>{formatDate(wedding.date)} {formatTime(wedding.time)}</span></div><div style={S.row}><span>장소</span><span>{wedding.place}</span></div><div style={S.row}><span>주소</span><span>{wedding.address}</span></div><div style={S.row}><span>연락처</span><a href={`tel:${wedding.phone}`} style={S.link}>{wedding.phone}</a></div></motion.div>
-          <motion.div style={S.card} variants={cardVariants} custom={2}><h3 style={S.cardTitle}>마음 전할 곳</h3><CopyBtn b={groom.account.bank} a="9004-003-084667" h={groom.account.holder}/><CopyBtn b={bride.account.bank} a={bride.account.number} h={bride.account.holder}/><CopyBtn b={bride.parentAccount.bank} a={bride.parentAccount.number} h={bride.parentAccount.holder}/></motion.div>
+          <motion.div style={S.card} variants={cardVariants} custom={2}><h3 style={S.cardTitle}>마음 전할 곳</h3><CopyBtn b={groom.account.bank} a="9004-003-084667" h={groom.account.holder}/><CopyBtn b="카카오뱅크" a="3333-209-2090629" h="이재현"/><CopyBtn b={bride.account.bank} a={bride.account.number} h={bride.account.holder}/><CopyBtn b={bride.parentAccount.bank} a={bride.parentAccount.number} h={bride.parentAccount.holder}/></motion.div>
         </motion.div>
       </motion.div>
 
