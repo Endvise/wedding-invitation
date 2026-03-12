@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { weddingConfig, formatDate, formatTime } from "@/lib/config";
 
 interface Comment {
@@ -49,78 +50,102 @@ export default function Home() {
 
   const { groom, bride, wedding, directions } = weddingConfig;
 
+  // Animation variants
+  const pageVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { duration: 0.8, staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" as const }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.95, y: 30 },
+    visible: (i: number) => ({
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { delay: i * 0.15, duration: 0.5, ease: "easeOut" as const }
+    })
+  };
+
   return (
     <main>
-      {toast && <div style={S.toast}>{toast}</div>}
+      {toast && <motion.div style={S.toast} initial={{opacity:0, y:-20}} animate={{opacity:1, y:0}} exit={{opacity:0}}>{toast}</motion.div>}
       
       {/* PAGE 1 */}
-      <div style={S.page}>
+      <motion.div 
+        style={S.page}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={pageVariants}
+      >
         <img src="/images/page1.jpg" style={S.bgImg} alt="bg1"/>
-        <div style={S.overlay}>
-          <p style={S.titleSmall}>WEDDING INVITATION</p>
-          <h1 style={S.title}>{groom.name} & {bride.name}</h1>
-          <p style={S.subtitle}>{groom.father}, {groom.mother}의 아들 {groom.name}과<br/>{bride.mother}의 딸 {bride.name} 결혼합니다</p>
-          <p style={S.info}>{formatDate(wedding.date)} {formatTime(wedding.time)}</p>
-          <p style={S.info}>{wedding.place}</p>
-        </div>
-      </div>
+        <motion.div style={S.overlay}>
+          <motion.p style={S.titleSmall} variants={itemVariants}>WEDDING INVITATION</motion.p>
+          <motion.h1 style={S.title} variants={itemVariants}>{groom.name} & {bride.name}</motion.h1>
+          <motion.p style={S.subtitle} variants={itemVariants}>{groom.father}, {groom.mother}의 아들 {groom.name}과<br/>{bride.mother}의 딸 {bride.name} 결혼합니다</motion.p>
+          <motion.p style={S.info} variants={itemVariants}>{formatDate(wedding.date)} {formatTime(wedding.time)}</motion.p>
+          <motion.p style={S.info} variants={itemVariants}>{wedding.place}</motion.p>
+        </motion.div>
+      </motion.div>
 
       {/* PAGE 2 */}
-      <div style={S.page}>
+      <motion.div 
+        style={S.page}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={pageVariants}
+      >
         <img src="/images/page2.jpg" style={S.bgImg} alt="bg2"/>
-        <div style={S.overlay}>
-          <div style={S.card}>
-            <h3 style={S.cardTitle}>Wedding Day</h3>
-            <div style={S.row}><span>일시</span><span>{formatDate(wedding.date)} {formatTime(wedding.time)}</span></div>
-            <div style={S.row}><span>장소</span><span>{wedding.place}</span></div>
-            <div style={S.row}><span>주소</span><span>{wedding.address}</span></div>
-            <div style={S.row}><span>연락처</span><a href={`tel:${wedding.phone}`} style={S.link}>{wedding.phone}</a></div>
-          </div>
-          <div style={S.card}>
-            <h3 style={S.cardTitle}>마음 전할 곳</h3>
-            <CopyBtn b={groom.account.bank} a={groom.account.number} h={groom.account.holder}/>
-            <CopyBtn b={bride.account.bank} a={bride.account.number} h={bride.account.holder}/>
-            <CopyBtn b={bride.parentAccount.bank} a={bride.parentAccount.number} h={bride.parentAccount.holder}/>
-          </div>
-        </div>
-      </div>
+        <motion.div style={S.overlay}>
+          <motion.div style={S.card} variants={cardVariants} custom={1}><h3 style={S.cardTitle}>Wedding Day</h3><div style={S.row}><span>일시</span><span>{formatDate(wedding.date)} {formatTime(wedding.time)}</span></div><div style={S.row}><span>장소</span><span>{wedding.place}</span></div><div style={S.row}><span>주소</span><span>{wedding.address}</span></div><div style={S.row}><span>연락처</span><a href={`tel:${wedding.phone}`} style={S.link}>{wedding.phone}</a></div></motion.div>
+          <motion.div style={S.card} variants={cardVariants} custom={2}><h3 style={S.cardTitle}>마음 전할 곳</h3><CopyBtn b={groom.account.bank} a={groom.account.number} h={groom.account.holder}/><CopyBtn b={bride.account.bank} a={bride.account.number} h={bride.account.holder}/><CopyBtn b={bride.parentAccount.bank} a={bride.parentAccount.number} h={bride.parentAccount.holder}/></motion.div>
+        </motion.div>
+      </motion.div>
 
-      {/* PAGE 3 - 방명록만 (갤러리 제거) */}
-      <div style={S.page}>
+      {/* PAGE 3 - 방명록만 */}
+      <motion.div 
+        style={S.page}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={pageVariants}
+      >
         <img src="/images/page3.jpg" style={S.bgImg} alt="bg3"/>
-        <div style={S.overlay}>
-          <div style={S.card}>
-            <h3 style={S.cardTitle}>방명록</h3>
-            <form onSubmit={handleSubmit} style={S.form}>
-              <input type="text" placeholder="이름" value={guestbookName} onChange={e=>setGuestbookName(e.target.value)} style={S.input}/>
-              <textarea placeholder="축하 메시지" value={guestbookMessage} onChange={e=>setGuestbookMessage(e.target.value)} rows={2} style={S.input}/>
-              <input type="password" placeholder="비밀번호" value={guestbookPassword} onChange={e=>setGuestbookPassword(e.target.value)} style={S.input}/>
-              <button type="submit" disabled={isSubmitting} style={S.btn}>{isSubmitting?"등록중":"방명록 남기기"}</button>
-            </form>
-            <div style={S.comments}>
-              {comments.length===0?<p style={S.noComm}>아직 방명록이 없습니다.</p>:
-              comments.map(c => <div key={c.id} style={S.comm}><b>{c.name}</b><p>{c.message}</p><small>{new Date(c.created_at).toLocaleDateString("ko-KR")}</small></div>)}
-            </div>
-          </div>
-        </div>
-      </div>
+        <motion.div style={S.overlay}>
+          <motion.div style={S.card} variants={cardVariants} custom={1}><h3 style={S.cardTitle}>방명록</h3><form onSubmit={handleSubmit} style={S.form}><input type="text" placeholder="이름" value={guestbookName} onChange={e=>setGuestbookName(e.target.value)} style={S.input}/><textarea placeholder="축하 메시지" value={guestbookMessage} onChange={e=>setGuestbookMessage(e.target.value)} rows={2} style={S.input}/><input type="password" placeholder="비밀번호" value={guestbookPassword} onChange={e=>setGuestbookPassword(e.target.value)} style={S.input}/><button type="submit" disabled={isSubmitting} style={S.btn}>{isSubmitting?"등록중":"방명록 남기기"}</button></form><div style={S.comments}>{comments.length===0?<p style={S.noComm}>아직 방명록이 없습니다.</p>:comments.map((c,i) => <motion.div key={c.id} style={S.comm} initial={{opacity:0, x:-20}} animate={{opacity:1, x:0}} transition={{delay:i*0.1}}><b>{c.name}</b><p>{c.message}</p><small>{new Date(c.created_at).toLocaleDateString("ko-KR")}</small></motion.div>)}</div></motion.div>
+        </motion.div>
+      </motion.div>
 
       {/* PAGE 4 */}
-      <div style={S.page}>
+      <motion.div 
+        style={S.page}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.3 }}
+        variants={pageVariants}
+      >
         <img src="/images/page4.jpg" style={S.bgImg} alt="bg4"/>
-        <div style={S.overlay}>
-          <h2 style={S.sectionTitle}>Contact & Location</h2>
-          <div style={S.card}><p style={S.label}>신랑측</p><b style={S.name}>{groom.name}</b><p style={S.parents}>{groom.father}, {groom.mother}</p></div>
-          <div style={S.card}><p style={S.label}>신부측</p><b style={S.name}>{bride.name}</b><p style={S.parents}>{bride.mother}</p></div>
-          <div style={S.card}>
-            <h3 style={S.cardTitle}>오시는 길</h3>
-            <p style={S.label}>지하철</p><p>{directions.subway}</p>
-            <p style={S.label}>자가용</p><p>"{directions.navi}" 검색</p>
-            <a href={`https://map.kakao.com/link/search/${wedding.address}`} target="_blank" style={S.mapBtn}>지도 보기</a>
-          </div>
-          <button onClick={()=>{navigator.clipboard.writeText(window.location.href);showToast("링크 복사됨");}} style={S.shareBtn}>청첩장 공유하기</button>
-        </div>
-      </div>
+        <motion.div style={S.overlay}>
+          <motion.h2 style={S.sectionTitle} variants={itemVariants}>Contact & Location</motion.h2>
+          <motion.div style={S.card} variants={cardVariants} custom={1}><p style={S.label}>신랑측</p><b style={S.name}>{groom.name}</b><p style={S.parents}>{groom.father}, {groom.mother}</p></motion.div>
+          <motion.div style={S.card} variants={cardVariants} custom={2}><p style={S.label}>신부측</p><b style={S.name}>{bride.name}</b><p style={S.parents}>{bride.mother}</p></motion.div>
+          <motion.div style={S.card} variants={cardVariants} custom={3}><h3 style={S.cardTitle}>오시는 길</h3><p style={S.label}>지하철</p><p>{directions.subway}</p><p style={S.label}>자가용</p><p>"{directions.navi}" 검색</p><a href={`https://map.kakao.com/link/search/${wedding.address}`} target="_blank" style={S.mapBtn}>지도 보기</a></motion.div>
+          <motion.button onClick={()=>{navigator.clipboard.writeText(window.location.href);showToast("링크 복사됨");}} style={S.shareBtn} variants={itemVariants} whileHover={{scale:1.02}} whileTap={{scale:0.98}}>청첩장 공유하기</motion.button>
+        </motion.div>
+      </motion.div>
     </main>
   );
 }
