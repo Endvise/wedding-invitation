@@ -9,6 +9,15 @@ export const metadata: Metadata = {
     description: "2025년 5월 17일 토요일 오후 1시",
     type: "website",
     url: "https://wedding-invitation-tan-iota.vercel.app",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "이재현 ♥ 이선미 결혼합니다",
+      },
+    ],
+    url: "https://wedding-invitation-tan-iota.vercel.app",
   },
 };
 
