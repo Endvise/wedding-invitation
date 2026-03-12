@@ -7,7 +7,7 @@ export const weddingConfig = {
     mother: process.env.NEXT_PUBLIC_GROOM_MOTHER || '신명주',
     account: {
       bank: process.env.NEXT_PUBLIC_GROOM_ACCOUNT_BANK || '새마을금고',
-      number: process.env.NEXT_PUBLIC_GROOM_ACCOUNT || '9004-003-094612',
+      number: process.env.NEXT_PUBLIC_GROOM_ACCOUNT || '9004-003-084667',
       holder: process.env.NEXT_PUBLIC_GROOM_ACCOUNT_HOLDER || '이현배,신명주',
     },
   },
