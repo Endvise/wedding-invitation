@@ -17,9 +17,6 @@ export const metadata: Metadata = {
         alt: "이재현 ♥ 이선미 결혼합니다",
       },
     ],
-  }
-
-    "og:image": "https://wedding-invitation-tan-iota.vercel.app/og-image.jpg",
   },
 };
 
