@@ -95,7 +95,7 @@ export default function Home() {
           <motion.p style={S.titleSmall} variants={itemVariants}>WEDDING INVITATION</motion.p>
           <motion.h1 style={S.title} variants={itemVariants}>{groom.name} & {bride.name}</motion.h1>
           <motion.p style={S.subtitle} variants={itemVariants}>{groom.father}, {groom.mother}의 아들 {groom.name}과<br/>{bride.mother}의 딸 {bride.name} 결혼합니다</motion.p>
-          <motion.p style={S.info} variants={itemVariants}>{formatDate(wedding.date)} {formatTime(wedding.time)}</motion.p>
+          <motion.p style={S.info} variants={itemVariants}>2026년 5월 17일 일요일 오후 1시</motion.p>
           <motion.p style={S.info} variants={itemVariants}>{wedding.place}</motion.p>
         </motion.div>
       </motion.div>
@@ -110,7 +110,7 @@ export default function Home() {
       >
         <img src="/images/page2.jpg" style={S.bgImg} alt="bg2"/>
         <motion.div style={S.overlay}>
-          <motion.div style={S.card} variants={cardVariants} custom={1}><h3 style={S.cardTitle}>Wedding Day</h3><div style={S.row}><span>일시</span><span>{formatDate(wedding.date)} {formatTime(wedding.time)}</span></div><div style={S.row}><span>장소</span><span>{wedding.place}</span></div><div style={S.row}><span>주소</span><span>{wedding.address}</span></div><div style={S.row}><span>연락처</span><a href={`tel:${wedding.phone}`} style={S.link}>{wedding.phone}</a></div></motion.div>
+          <motion.div style={S.card} variants={cardVariants} custom={1}><h3 style={S.cardTitle}>Wedding Day</h3><div style={S.row}><span>일시</span><span>2026년 5월 17일 일요일 오후 1시</span></div><div style={S.row}><span>장소</span><span>{wedding.place}</span></div><div style={S.row}><span>주소</span><span>{wedding.address}</span></div><div style={S.row}><span>연락처</span><a href={`tel:${wedding.phone}`} style={S.link}>{wedding.phone}</a></div></motion.div>
           <motion.div style={S.card} variants={cardVariants} custom={2}><h3 style={S.cardTitle}>마음 전할 곳</h3><CopyBtn b={groom.account.bank} a="9004-003-084667" h={groom.account.holder}/><CopyBtn b="카카오뱅크" a="3333-11-2090629" h="이재현"/><CopyBtn b={bride.account.bank} a={bride.account.number} h={bride.account.holder}/><CopyBtn b={bride.parentAccount.bank} a={bride.parentAccount.number} h={bride.parentAccount.holder}/></motion.div>
         </motion.div>
       </motion.div>
