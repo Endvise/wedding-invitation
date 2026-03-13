@@ -26,7 +26,7 @@ export const weddingConfig = {
     },
   },
   wedding: {
-    date: process.env.NEXT_PUBLIC_WEDDING_DATE || '2025-05-17',
+    date: process.env.NEXT_PUBLIC_WEDDING_DATE || '2026-05-17',
     time: process.env.NEXT_PUBLIC_WEDDING_TIME || '13:00',
     place: process.env.NEXT_PUBLIC_WEDDING_PLACE || '김해산정',
     address: process.env.NEXT_PUBLIC_WEDDING_ADDRESS || '경남 김해시 가야로 347-30',
